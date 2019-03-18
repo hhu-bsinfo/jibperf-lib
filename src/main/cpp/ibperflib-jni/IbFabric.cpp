@@ -24,14 +24,23 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_refreshCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
 
-    handle->RefreshCounters();
+    try {
+        handle->RefreshCounters();
+    } catch(const IbPerfLib::IbFileException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
+    } catch(const IbPerfLib::IbMadException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+    }
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
 
-    handle->ResetCounters();
-
+    try {
+        handle->ResetCounters();
+    } catch(const IbPerfLib::IbMadException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+    }
 }
 
 JNIEXPORT jint JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_getNumNodes(JNIEnv *env, jobject obj) {
