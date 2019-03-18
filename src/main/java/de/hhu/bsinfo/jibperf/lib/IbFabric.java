@@ -12,6 +12,8 @@ public class IbFabric {
         }
     }
 
+    private long nativeHandle = 0;
+
     public IbFabric(boolean compatibility) {
         init(compatibility);
     }
@@ -23,4 +25,6 @@ public class IbFabric {
     public native void resetCounters();
 
     public native int getNumNodes();
+
+    public native void close();
 }

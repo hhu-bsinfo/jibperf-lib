@@ -39,6 +39,14 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters
 JNIEXPORT jint JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_getNumNodes
   (JNIEnv *, jobject);
 
+/*
+ * Class:     de_hhu_bsinfo_jibperf_lib_IbFabric
+ * Method:    close
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_close
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
