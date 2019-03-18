@@ -3,7 +3,7 @@ import com.cisco.gradle.externalbuild.tasks.CMake
 
 plugins {
     id 'java'
-    id 'com.cisco.external-build' version '1.10'
+    id 'com.cisco.external-build' version '1.14'
 }
 
 version '0.1.0-SNAPSHOT'
@@ -31,7 +31,7 @@ model {
                 workingDir 'build'
                 
                 environment = [
-                        'PATH': toolChainPath,
+                        'PATH': toolChainPath
                 ]
             }
         }

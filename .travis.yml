@@ -1,0 +1,33 @@
+language: java
+dist: xenial
+
+addons:
+  apt:
+    packages:
+      - libibverbs-dev
+      - libibmad-dev
+      - libibumad-dev
+      - libibnetdisc-dev
+      - libopensm-dev
+
+stages:
+  - name: build
+
+jobs:
+  include:
+    - stage: build
+      script: ./gradlew jar
+
+before_deploy:
+  - export RELEASE_JAR_FILE=$(ls build/libs/*.jar)
+
+deploy:
+  provider: releases
+  api_key: ${ACCESS_TOKEN}
+  file: ${RELEASE_JAR_FILE}
+  skip_cleanup: true
+  overwrite: true
+  on:
+    repo: hhu-bsinfo/jibperf-lib
+    branch: master
+    tags: true
