@@ -1,9 +1,22 @@
 #include "IbFabric.h"
 #include "Common.h"
 #include <IbPerfLib/IbFabric.h>
+#include <IbPerfLib/Exception/IbFileException.h>
+#include <IbPerfLib/Exception/IbMadException.h>
+#include <IbPerfLib/Exception/IbVerbsException.h>
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env, jobject obj, jboolean compatibility) {
-    IbPerfLib::IbFabric *handle = new IbPerfLib::IbFabric(compatibility);
+    IbPerfLib::IbFabric *handle = nullptr;
+
+    try {
+        handle = new IbPerfLib::IbFabric(compatibility);
+    } catch(const IbPerfLib::IbFileException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
+    } catch(const IbPerfLib::IbMadException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+    } catch(const IbPerfLib::IbVerbsException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbVerbsException"), exception.what());
+    }
 
     setNativeHandle(env, obj, handle);
 }
