@@ -1,0 +1,47 @@
+import com.cisco.gradle.externalbuild.ExternalNativeLibrarySpec
+import com.cisco.gradle.externalbuild.tasks.CMake
+
+plugins {
+    id 'java'
+    id 'com.cisco.external-build' version '1.10'
+}
+
+version '0.1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+model {
+    components {
+        IbPerfLibJNI(ExternalNativeLibrarySpec) {
+            buildConfig(CMake) {
+                cmakeRoot '.'
+                targets 'all'
+
+                inputs.file 'CMakeLists.txt'
+                
+                workingDir 'build'
+                
+                environment = [
+                        'PATH': toolChainPath,
+                ]
+            }
+        }
+    }
+}
+
+compileJava.dependsOn "IbPerfLibJNISharedLibrary"
+
+jar {
+    from('build/libs/') {
+        include 'libIbPerfLibJNI.so'
+    }
+}
