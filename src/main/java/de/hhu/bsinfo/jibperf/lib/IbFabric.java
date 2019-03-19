@@ -8,14 +8,6 @@ import java.io.IOException;
 
 public class IbFabric {
 
-    static {
-        try {
-            JniUtil.loadNativeLibraryFromJar("/libIbPerfLibJNI.so");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private long m_nativeHandle = 0;
 
     private IbNode[] m_nodes = null;

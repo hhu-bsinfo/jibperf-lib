@@ -20,10 +20,11 @@ message(STATUS "Project " ${PROJECT_NAME})
 include_directories(${IBPERFLIBJNI_SRC_DIR})
  
 set(SOURCE_FILES
+        ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/Common.cpp
+        ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/NativeBuildConfig.cpp
         ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/IbFabric.cpp
         ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/IbNode.cpp
-        ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/IbPort.cpp
-        ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/Common.cpp)
+        ${IBPERFLIBJNI_SRC_DIR}/ibperflib-jni/IbPort.cpp)
  
 add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 
