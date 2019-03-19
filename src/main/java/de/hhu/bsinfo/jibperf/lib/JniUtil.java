@@ -16,7 +16,7 @@ class JniUtil {
      * @param path The library's path inside the .jar-file
      */
      static void loadNativeLibraryFromJar(String path) throws IOException {
-        File tmpDir = Files.createTempDirectory("JSocketBench-native").toFile();
+        File tmpDir = Files.createTempDirectory("jibperf-native").toFile();
         tmpDir.deleteOnExit();
 
         File nativeLibTmpFile = new File(tmpDir, path);

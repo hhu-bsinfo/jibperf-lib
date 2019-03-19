@@ -6,10 +6,10 @@
 #include <IbPerfLib/Exception/IbVerbsException.h>
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env, jobject obj, jboolean compatibility) {
-    IbPerfLib::IbFabric *handle = nullptr;
+    IbPerfLib::IbFabric *fabricHandle = nullptr;
 
     try {
-        handle = new IbPerfLib::IbFabric(compatibility);
+        fabricHandle = new IbPerfLib::IbFabric(compatibility);
     } catch(const IbPerfLib::IbFileException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
     } catch(const IbPerfLib::IbMadException &exception) {
@@ -18,22 +18,39 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbVerbsException"), exception.what());
     }
 
-    setNativeHandle(env, obj, handle);
+    setNativeHandle(env, obj, fabricHandle);
 
-    jclass fabricClass = env->GetObjectClass(obj);
+    jclass fabricClass = env->FindClass("de/hhu/bsinfo/jibperf/lib/IbFabric");
     jclass nodeClass = env->FindClass("de/hhu/bsinfo/jibperf/lib/IbNode");
+    jclass portClass = env->FindClass("de/hhu/bsinfo/jibperf/lib/IbPort");
 
-    jobjectArray nodes = env->NewObjectArray(handle->GetNumNodes(), nodeClass, nullptr);
+    jobjectArray nodes = env->NewObjectArray(fabricHandle->GetNumNodes(), nodeClass, nullptr);
     jmethodID nodeConstructor = env->GetMethodID(nodeClass, "<init>", "(JJLjava/lang/String;)V");
-
     jfieldID nodesID = env->GetFieldID(fabricClass, "m_nodes", "[Lde/hhu/bsinfo/jibperf/lib/IbNode;");
 
-    for(uint32_t i = 0; i < handle->GetNumNodes(); i++) {
-        IbPerfLib::IbNode *nodeHandle = handle->GetNodes()[i];
+    jmethodID portConstructor = env->GetMethodID(portClass, "<init>", "(JSSS)V");
+    jfieldID portsID = env->GetFieldID(nodeClass, "m_ports", "[Lde/hhu/bsinfo/jibperf/lib/IbPort;");
+
+    for(uint32_t i = 0; i < fabricHandle->GetNumNodes(); i++) {
+        IbPerfLib::IbNode *nodeHandle = fabricHandle->GetNodes()[i];
+
         jobject node = env->NewObject(nodeClass, nodeConstructor, reinterpret_cast<jlong>(nodeHandle),
                         nodeHandle->GetGuid(), env->NewStringUTF(nodeHandle->GetDescription().c_str()));
 
         env->SetObjectArrayElement(nodes, i, node);
+
+        jobjectArray ports = env->NewObjectArray(nodeHandle->GetNumPorts(), portClass, nullptr);
+        
+        for(uint32_t j = 0; j < nodeHandle->GetNumPorts(); j++) {
+            IbPerfLib::IbPort *portHandle = nodeHandle->GetPorts()[j];
+
+            jobject port = env->NewObject(portClass, portConstructor, reinterpret_cast<jlong>(portHandle),
+                        portHandle->GetLid(), portHandle->GetNum(), portHandle->GetLinkWidth());
+
+            env->SetObjectArrayElement(ports, j, port);
+        }
+
+        env->SetObjectField(node, portsID, ports);
     }
 
     env->SetObjectField(obj, nodesID, nodes);

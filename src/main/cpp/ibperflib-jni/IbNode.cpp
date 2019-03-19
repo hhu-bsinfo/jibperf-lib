@@ -1,5 +1,8 @@
 #include "IbNode.h"
 #include "Common.h"
+#include <IbPerfLib/IbNode.h>
+#include <IbPerfLib/Exception/IbFileException.h>
+#include <IbPerfLib/Exception/IbMadException.h>
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_resetCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
@@ -31,7 +34,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvDataBytes(JN
     return static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj))->GetRcvDataBytes();
 }
 
-JNIEXPORT jlong JNICALL JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitPkts(JNIEnv *env, jobject obj) {
+JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitPkts(JNIEnv *env, jobject obj) {
     return static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj))->GetXmitPkts();
 }
 

@@ -1,8 +1,6 @@
 package de.hhu.bsinfo.jibperf.app;
 
 import de.hhu.bsinfo.jibperf.lib.IbFabric;
-import de.hhu.bsinfo.jibperf.lib.IbNode;
-import de.hhu.bsinfo.jibperf.lib.exception.IbPerfException;
 
 public class IbPerfTest {
 

@@ -3,36 +3,33 @@ package de.hhu.bsinfo.jibperf.lib;
 import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
 
-public class IbNode implements IbPerfCounter {
+public class IbPort implements IbPerfCounter {
 
     private long m_nativeHandle;
 
-    private long m_guid;
+    private short m_lid;
 
-    private String m_description;
+    private short m_portNum;
 
-    private IbPort[] m_ports = null;
+    private short m_linkWidth;
 
-    private IbNode(long nativeHandle, long guid, String description) {
+    private IbPort(long nativeHandle, short lid, short portNum, short linkWidth) {
         this.m_nativeHandle = nativeHandle;
-        this.m_guid = guid;
-        this.m_description = description;
+        this.m_lid = lid;
+        this.m_portNum = portNum;
+        this.m_linkWidth = linkWidth;
     }
 
-    public String getDescription() {
-        return m_description;
+    public short getLid() {
+        return m_lid;
     }
 
-    public long getGuid() {
-        return m_guid;
+    public short getNum() {
+        return m_portNum;
     }
 
-    public short getNumPorts() {
-        return 0;
-    }
-
-    public IbPort[] getPorts() {
-        return m_ports;
+    public short getLinkWidth() {
+        return m_linkWidth;
     }
 
     @Override
@@ -106,17 +103,16 @@ public class IbNode implements IbPerfCounter {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("Name: ")
-                .append(m_description)
-                .append(", ")
-                .append("GUID: 0x")
-                .append(String.format("%016x", m_guid))
-                .append("\n");
-
-        for(IbPort port : m_ports) {
-            builder.append("    ").append(port);
-        }
-
-        return builder.toString();
+        return "Port Number: " +
+                m_portNum +
+                ", LID: " +
+                m_lid +
+                ", Link width: " +
+                m_linkWidth +
+                "x, XmitBytes: " +
+                getXmitDataBytes() +
+                " Bytes, RcvBytes: " +
+                getRcvDataBytes() +
+                " Bytes\n";
     }
 }

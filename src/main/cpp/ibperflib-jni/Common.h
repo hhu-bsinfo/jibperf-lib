@@ -1,13 +1,10 @@
+#ifndef IBPERFLIBJNI_COMMON_H
+#define IBPERFLIBJNI_COMMON_H
+
 #include <jni.h>
 
-void* getNativeHandle(JNIEnv *env, jobject obj) {
-    jclass cls = env->GetObjectClass(obj);
-    jfieldID fieldID = env->GetFieldID(cls, "m_nativeHandle", "J");
-    return reinterpret_cast<void*>(env->GetLongField(obj, fieldID));
-}
+void* getNativeHandle(JNIEnv *env, jobject obj);
 
-void setNativeHandle(JNIEnv *env, jobject obj, void *handle) {
-    jclass cls = env->GetObjectClass(obj);
-    jfieldID fieldID = env->GetFieldID(cls, "m_nativeHandle", "J");
-    env->SetLongField(obj, fieldID, reinterpret_cast<jlong>(handle));
-}
+void setNativeHandle(JNIEnv *env, jobject obj, void *handle);
+
+#endif
