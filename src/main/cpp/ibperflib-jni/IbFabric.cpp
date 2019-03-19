@@ -19,6 +19,24 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
     }
 
     setNativeHandle(env, obj, handle);
+
+    jclass fabricClass = env->GetObjectClass(obj);
+    jclass nodeClass = env->FindClass("de/hhu/bsinfo/jibperf/lib/IbNode");
+
+    jobjectArray nodes = env->NewObjectArray(handle->GetNumNodes(), nodeClass, nullptr);
+    jmethodID nodeConstructor = env->GetMethodID(nodeClass, "<init>", "(JJLjava/lang/String;)V");
+
+    jfieldID nodesID = env->GetFieldID(fabricClass, "m_nodes", "[Lde/hhu/bsinfo/jibperf/lib/IbNode;");
+
+    for(uint32_t i = 0; i < handle->GetNumNodes(); i++) {
+        IbPerfLib::IbNode *nodeHandle = handle->GetNodes()[i];
+        jobject node = env->NewObject(nodeClass, nodeConstructor, reinterpret_cast<jlong>(nodeHandle),
+                        nodeHandle->GetGuid(), env->NewStringUTF(nodeHandle->GetDescription().c_str()));
+
+        env->SetObjectArrayElement(nodes, i, node);
+    }
+
+    env->SetObjectField(obj, nodesID, nodes);
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_refreshCounters(JNIEnv *env, jobject obj) {
@@ -43,14 +61,10 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters(JNI
     }
 }
 
-JNIEXPORT jint JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_getNumNodes(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
-
-    return handle->GetNumNodes();
-}
-
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_close(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
 
     delete handle;
+
+    setNativeHandle(env, obj, nullptr);
 }

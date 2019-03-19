@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
 
-class JniHelper {
+class JniUtil {
 
     /**
      * Load a native library, that is contained inside the .jar-file.
@@ -22,7 +22,7 @@ class JniHelper {
         File nativeLibTmpFile = new File(tmpDir, path);
         nativeLibTmpFile.deleteOnExit();
 
-        URL url = JniHelper.class.getResource(path);
+        URL url = JniUtil.class.getResource(path);
         InputStream in = url.openStream();
 
         Files.copy(in, nativeLibTmpFile.toPath());

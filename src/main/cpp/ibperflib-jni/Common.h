@@ -1,13 +1,13 @@
 #include <jni.h>
 
 void* getNativeHandle(JNIEnv *env, jobject obj) {
-    jclass jCls = env->GetObjectClass(obj);
-    jfieldID fieldId = env->GetFieldID(jCls, "nativeHandle", "J");
-    return reinterpret_cast<void*>(env->GetLongField(obj, fieldId));
+    jclass cls = env->GetObjectClass(obj);
+    jfieldID fieldID = env->GetFieldID(cls, "m_nativeHandle", "J");
+    return reinterpret_cast<void*>(env->GetLongField(obj, fieldID));
 }
 
 void setNativeHandle(JNIEnv *env, jobject obj, void *handle) {
-    jclass jCls = env->GetObjectClass(obj);
-    jfieldID fieldId = env->GetFieldID(jCls, "nativeHandle", "J");
-    env->SetLongField(obj, fieldId, reinterpret_cast<jlong>(handle));
+    jclass cls = env->GetObjectClass(obj);
+    jfieldID fieldID = env->GetFieldID(cls, "m_nativeHandle", "J");
+    env->SetLongField(obj, fieldID, reinterpret_cast<jlong>(handle));
 }

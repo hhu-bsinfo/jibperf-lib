@@ -41,6 +41,18 @@ model {
 compileJava.dependsOn "IbPerfLibJNISharedLibrary"
 
 jar {
+    doFirst {
+        println "\nCMake output:"
+        new File('build/tmp/externalBuildIbPerfLibJNISharedLibrary/cmake-output.txt').eachLine { line ->
+            println line
+        }
+
+        println "\nMake output:"
+        new File('build/tmp/externalBuildIbPerfLibJNISharedLibrary/makeAll-output.txt').eachLine { line ->
+            println line
+        }
+    }
+
     from('build/libs/') {
         include 'libIbPerfLibJNI.so'
     }

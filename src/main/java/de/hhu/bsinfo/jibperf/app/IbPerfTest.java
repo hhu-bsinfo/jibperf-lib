@@ -1,21 +1,22 @@
 package de.hhu.bsinfo.jibperf.app;
 
 import de.hhu.bsinfo.jibperf.lib.IbFabric;
+import de.hhu.bsinfo.jibperf.lib.IbNode;
+import de.hhu.bsinfo.jibperf.lib.exception.IbPerfException;
 
 public class IbPerfTest {
 
     public static void main(String[] args) {
         boolean compatibility = false;
 
-        if(args.length > 0) {
-            compatibility = Boolean.parseBoolean(args[0]);
+        if(args.length < 1) {
+            System.out.println("Usage: ./IbPerfTest <mad/compat>");
+            System.exit(1);
         }
 
         IbFabric fabric = new IbFabric(compatibility);
 
-        int numNodes = fabric.getNumNodes();
-
-        System.out.printf("Found %d %s in the fabric!\n", numNodes, numNodes == 1 ? "node" : "nodes");
+        System.out.println(fabric);
 
         fabric.close();
     }

@@ -10,13 +10,15 @@ public class IbFabric {
 
     static {
         try {
-            JniHelper.loadNativeLibraryFromJar("/libIbPerfLibJNI.so");
+            JniUtil.loadNativeLibraryFromJar("/libIbPerfLibJNI.so");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private long nativeHandle = 0;
+    private long m_nativeHandle = 0;
+
+    private IbNode[] m_nodes = null;
 
     public IbFabric(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException {
         init(compatibility);
@@ -24,11 +26,31 @@ public class IbFabric {
 
     private native void init(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException;
 
-    public native void refreshCounters();
+    public native void refreshCounters() throws IbFileException, IbMadException;
 
-    public native void resetCounters();
-
-    public native int getNumNodes();
+    public native void resetCounters() throws IbMadException;
 
     public native void close();
+
+    public int getNumNodes() {
+        return m_nodes.length;
+    }
+
+    public IbNode[] getNodes() {
+        return m_nodes;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder("Discovered ")
+                .append(m_nodes.length)
+                .append(m_nodes.length == 1 ? " nodes" : " nodes")
+                .append(" in the fabric:\n");
+
+        for(IbNode node : m_nodes) {
+            builder.append(node);
+        }
+
+        return builder.toString();
+    }
 }
