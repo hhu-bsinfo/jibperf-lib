@@ -105,8 +105,7 @@ public class IbPort implements IbPerfCounter {
     public String toString() {
         return "Port Number: " +
                 m_portNum +
-                ", LID: " +
-                m_lid +
+                String.format(", LID: 0x%x", m_lid) +
                 ", Link width: " +
                 m_linkWidth +
                 "x, XmitBytes: " +
