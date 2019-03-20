@@ -13,13 +13,17 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
         fabricHandle = new IbPerfLib::IbFabric(compatibility);
     } catch(const IbPerfLib::IbFileException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
+        return;
     } catch(const IbPerfLib::IbMadException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+        return;
     } catch(const IbPerfLib::IbVerbsException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbVerbsException"), exception.what());
+        return;
     } catch(const IbPerfLib::IbNetDiscException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbNetDiscException"), exception.what());
-     }
+        return;
+    }
 
     setNativeHandle(env, obj, fabricHandle);
 
@@ -66,8 +70,10 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_refreshCounters(J
         handle->RefreshCounters();
     } catch(const IbPerfLib::IbFileException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
+        return;
     } catch(const IbPerfLib::IbMadException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+        return;
     }
 }
 
@@ -78,6 +84,7 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters(JNI
         handle->ResetCounters();
     } catch(const IbPerfLib::IbMadException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
+        return;
     }
 }
 
