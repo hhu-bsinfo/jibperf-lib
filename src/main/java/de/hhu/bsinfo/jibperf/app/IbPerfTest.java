@@ -2,7 +2,7 @@ package de.hhu.bsinfo.jibperf.app;
 
 import de.hhu.bsinfo.jibperf.lib.IbFabric;
 import de.hhu.bsinfo.jibperf.lib.NativeBuildConfig;
-import de.hhu.bsinfo.jibperf.lib.exception.IbPerfException;
+import de.hhu.bsinfo.jibperf.lib.exception.*;
 
 public class IbPerfTest {
 
@@ -19,14 +19,21 @@ public class IbPerfTest {
             System.exit(1);
         }
 
+        boolean compatability = false;
+
+        if(args[0].equals("compat")){
+            compatability = true;
+        } else if(!args[0].equals("mad")){
+            System.out.println("Usage: ./IbPerfTest <mad/compat>");
+            System.exit(1);
+        }
+
         IbFabric fabric = null;
 
-        if(args[0].equals("mad")) {
-            fabric = new IbFabric(false);
-        } else if(args[0].equals("compat")){
-            fabric = new IbFabric(true);
-        } else {
-            System.out.println("Usage: ./IbPerfTest <mad/compat>");
+        try {
+            fabric = new IbFabric(compatability);
+        } catch (IbFileException | IbMadException | IbVerbsException | IbNetDiscException e) {
+            e.printStackTrace();
             System.exit(1);
         }
 

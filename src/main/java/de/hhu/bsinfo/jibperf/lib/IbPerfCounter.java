@@ -1,10 +1,13 @@
 package de.hhu.bsinfo.jibperf.lib;
 
+import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
+import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
+
 public interface IbPerfCounter {
 
-    void resetCounters();
+    void resetCounters() throws IbFileException, IbMadException;
 
-    void refreshCounters();
+    void refreshCounters() throws IbMadException;
 
     long getXmitDataBytes();
 

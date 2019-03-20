@@ -4,6 +4,7 @@
 #include <IbPerfLib/Exception/IbFileException.h>
 #include <IbPerfLib/Exception/IbMadException.h>
 #include <IbPerfLib/Exception/IbVerbsException.h>
+#include <IbPerfLib/Exception/IbNetDiscException.h>
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env, jobject obj, jboolean compatibility) {
     IbPerfLib::IbFabric *fabricHandle = nullptr;
@@ -16,7 +17,9 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbMadException"), exception.what());
     } catch(const IbPerfLib::IbVerbsException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbVerbsException"), exception.what());
-    }
+    } catch(const IbPerfLib::IbNetDiscException &exception) {
+        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbNetDiscException"), exception.what());
+     }
 
     setNativeHandle(env, obj, fabricHandle);
 

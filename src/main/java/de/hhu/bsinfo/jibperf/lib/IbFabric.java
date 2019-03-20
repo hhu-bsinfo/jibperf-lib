@@ -2,6 +2,7 @@ package de.hhu.bsinfo.jibperf.lib;
 
 import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
+import de.hhu.bsinfo.jibperf.lib.exception.IbNetDiscException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbVerbsException;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class IbFabric {
 
     private IbNode[] m_nodes = null;
 
-    public IbFabric(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException {
+    public IbFabric(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException {
         init(compatibility);
     }
 
