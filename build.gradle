@@ -3,10 +3,14 @@ import com.cisco.gradle.externalbuild.tasks.CMake
 
 plugins {
     id 'java'
+    id 'maven-publish'
     id 'com.cisco.external-build' version '1.14'
+    id 'com.jfrog.bintray' version '1.8.4'
+    id "com.jfrog.artifactory" version "4.7.5"
 }
 
-version '0.1.0-SNAPSHOT'
+group = 'de.hhu.bsinfo'
+version version = '0.1.0' + (Boolean.valueOf(System.getProperty('release')) ? '' : '-SNAPSHOT')
 
 sourceCompatibility = 1.8
 
@@ -57,3 +61,7 @@ jar {
         include 'libIbPerfLibJNI.so'
     }
 }
+
+apply from: 'publish.gradle'
+apply from: 'bintray.gradle'
+apply from: 'artifactory.gradle'
