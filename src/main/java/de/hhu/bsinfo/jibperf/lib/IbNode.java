@@ -2,6 +2,7 @@ package de.hhu.bsinfo.jibperf.lib;
 
 import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
+import de.hhu.bsinfo.jibperf.lib.exception.IbVerbsException;
 
 public class IbNode implements IbPerfCounter {
 
@@ -18,6 +19,8 @@ public class IbNode implements IbPerfCounter {
         this.m_guid = guid;
         this.m_description = description;
     }
+
+    public static native IbNode[] getLocalNodes() throws IbVerbsException;
 
     public String getDescription() {
         return m_description;

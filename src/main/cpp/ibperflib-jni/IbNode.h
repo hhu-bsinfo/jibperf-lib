@@ -9,6 +9,14 @@ extern "C" {
 #endif
 /*
  * Class:     de_hhu_bsinfo_jibperf_lib_IbNode
+ * Method:    getLocalNodes
+ * Signature: ()[Lde/hhu/bsinfo/jibperf/lib/IbNode;
+ */
+JNIEXPORT jobjectArray JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLocalNodes
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     de_hhu_bsinfo_jibperf_lib_IbNode
  * Method:    resetCounters
  * Signature: ()V
  */

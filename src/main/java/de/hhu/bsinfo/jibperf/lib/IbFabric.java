@@ -37,7 +37,7 @@ public class IbFabric {
     public String toString() {
         StringBuilder builder = new StringBuilder("Discovered ")
                 .append(m_nodes.length)
-                .append(m_nodes.length == 1 ? " nodes" : " nodes")
+                .append(m_nodes.length == 1 ? " node" : " nodes")
                 .append(" in the fabric:\n");
 
         for(IbNode node : m_nodes) {
