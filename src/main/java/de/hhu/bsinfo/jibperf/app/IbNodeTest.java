@@ -30,7 +30,7 @@ public class IbNodeTest {
             try {
                 for(IbNode node : nodes) {
                     node.refreshCounters();
-                    System.out.println(node);
+                    System.out.println(node + "\n");
                 }
 
                 Thread.sleep(5000);

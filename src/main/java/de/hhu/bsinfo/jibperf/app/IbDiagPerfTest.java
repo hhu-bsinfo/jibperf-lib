@@ -1,38 +1,24 @@
 package de.hhu.bsinfo.jibperf.app;
 
-import de.hhu.bsinfo.jibperf.lib.IbFabric;
+import de.hhu.bsinfo.jibperf.lib.IbDiagPerfCounter;
 import de.hhu.bsinfo.jibperf.lib.NativeBuildConfig;
-import de.hhu.bsinfo.jibperf.lib.exception.*;
+import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
+import de.hhu.bsinfo.jibperf.lib.exception.IbPerfException;
 
-public class IbPerfTest {
-
+public class IbDiagPerfTest {
     private static boolean isRunning = true;
 
     public static void main(String[] args) {
         System.out.printf("IbPerfLib %s - git %s(%s)\nBuild date: %s\nAdditional extended counters: %s\n\n",
                 NativeBuildConfig.getVersion(), NativeBuildConfig.getGitRevision(), NativeBuildConfig.getGitBranch(),
                 NativeBuildConfig.getBuildDate(), NativeBuildConfig.areAdditionalExtendedCountersEnabled() ?
-                "Enabled" : "Disabled");
+                        "Enabled" : "Disabled");
 
-        if(args.length < 1) {
-            System.out.println("Usage: ./IbPerfTest <mad/compat>");
-            System.exit(1);
-        }
-
-        boolean compatability = false;
-
-        if(args[0].equals("compat")){
-            compatability = true;
-        } else if(!args[0].equals("mad")){
-            System.out.println("Usage: ./IbPerfTest <mad/compat>");
-            System.exit(1);
-        }
-
-        IbFabric fabric = null;
+        IbDiagPerfCounter[] counters = null;
 
         try {
-            fabric = new IbFabric(compatability);
-        } catch (IbFileException | IbMadException | IbVerbsException | IbNetDiscException e) {
+            counters = IbDiagPerfCounter.getLocalPorts();
+        } catch(IbFileException e) {
             e.printStackTrace();
             System.exit(1);
         }
@@ -41,15 +27,17 @@ public class IbPerfTest {
 
         while(isRunning) {
             try {
-                fabric.refreshCounters();
-                System.out.println(fabric + "\n");
+                for(IbDiagPerfCounter counter : counters) {
+                    counter.refreshCounters();
+                    System.out.println(counter + "\n");
+                }
+
+                System.out.println();
 
                 Thread.sleep(5000);
             } catch(IbPerfException exception) {
                 System.out.printf("An exception occurred: %s", exception.getMessage());
             } catch(InterruptedException ignored) {}
         }
-
-        fabric.close();
     }
 }

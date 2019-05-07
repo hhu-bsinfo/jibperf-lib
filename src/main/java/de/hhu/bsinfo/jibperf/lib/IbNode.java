@@ -117,8 +117,10 @@ public class IbNode implements IbPerfCounter {
                 .append("\n");
 
         for(IbPort port : m_ports) {
-            builder.append("    ").append(port);
+            builder.append("    ").append(port).append("\n");
         }
+
+        builder.setLength(builder.length() - 1);
 
         return builder.toString();
     }

@@ -112,6 +112,6 @@ public class IbPort implements IbPerfCounter {
                 getXmitDataBytes() +
                 " Bytes, RcvBytes: " +
                 getRcvDataBytes() +
-                " Bytes\n";
+                " Bytes";
     }
 }

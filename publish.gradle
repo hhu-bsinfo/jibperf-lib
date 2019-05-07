@@ -26,6 +26,14 @@ publishing {
 
             from components.java
 
+            artifact sourcesJar {
+                classifier 'sources'
+            }
+
+            artifact javadocJar {
+                classifier 'javadoc'
+            }
+
             groupId project.group
             artifactId project.name
             version project.version

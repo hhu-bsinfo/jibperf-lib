@@ -1,5 +1,6 @@
 #include "IbNode.h"
 #include "Common.h"
+#include <verbs.h>
 #include <IbPerfLib/IbNode.h>
 #include <IbPerfLib/Exception/IbFileException.h>
 #include <IbPerfLib/Exception/IbVerbsException.h>

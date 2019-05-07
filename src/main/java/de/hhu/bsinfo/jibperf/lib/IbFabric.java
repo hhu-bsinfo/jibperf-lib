@@ -41,8 +41,10 @@ public class IbFabric {
                 .append(" in the fabric:\n");
 
         for(IbNode node : m_nodes) {
-            builder.append(node);
+            builder.append(node).append("\n");
         }
+
+        builder.setLength(builder.length() - 1);
 
         return builder.toString();
     }

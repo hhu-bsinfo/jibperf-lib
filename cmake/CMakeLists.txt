@@ -18,7 +18,7 @@ cmake_minimum_required(VERSION 3.5)
 include(ExternalProject)
 
 # Get JNI variables
-find_package(JNI)
+find_package(JNI REQUIRED)
 
 if(JNI_FOUND)
     message(STATUS "JNI_INCLUDE_DIRS=${JNI_INCLUDE_DIRS}")
