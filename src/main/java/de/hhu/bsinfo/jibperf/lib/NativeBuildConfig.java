@@ -15,5 +15,4 @@ public class NativeBuildConfig {
     public static native String getBuildDate();
 
     public static native boolean areAdditionalExtendedCountersEnabled();
-
 }

@@ -50,5 +50,4 @@ public interface IbPerfCounter {
     long getVL15Dropped();
 
     long getXmitWait();
-
 }

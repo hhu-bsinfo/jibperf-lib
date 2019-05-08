@@ -6,13 +6,16 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbPerfException;
 
 public class IbDiagPerfTest {
+
+    private static final String CLASS_NAME = IbDiagPerfTest.class.getSimpleName();
+
     private static boolean isRunning = true;
 
     public static void main(String[] args) {
-        System.out.printf("IbPerfLib %s - git %s(%s)\nBuild date: %s\nAdditional extended counters: %s\n\n",
-                NativeBuildConfig.getVersion(), NativeBuildConfig.getGitRevision(), NativeBuildConfig.getGitBranch(),
-                NativeBuildConfig.getBuildDate(), NativeBuildConfig.areAdditionalExtendedCountersEnabled() ?
-                        "Enabled" : "Disabled");
+        System.out.printf("Running %s!\nUsing IbPerfLib %s - git %s(%s)\nBuild date: %s\n" +
+                        "Additional extended counters: %s\n\n", CLASS_NAME, NativeBuildConfig.getVersion(),
+                NativeBuildConfig.getGitRevision(), NativeBuildConfig.getGitBranch(), NativeBuildConfig.getBuildDate(),
+                NativeBuildConfig.areAdditionalExtendedCountersEnabled() ? "Enabled" : "Disabled");
 
         IbDiagPerfCounter[] counters = null;
 
