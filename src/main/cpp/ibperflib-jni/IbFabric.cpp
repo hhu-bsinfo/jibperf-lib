@@ -66,6 +66,11 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env,
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_refreshCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
 
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
+
     try {
         handle->RefreshCounters();
     } catch(const IbPerfLib::IbFileException &exception) {
@@ -80,6 +85,11 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_refreshCounters(J
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
 
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
+
     try {
         handle->ResetCounters();
     } catch(const IbPerfLib::IbMadException &exception) {
@@ -90,6 +100,11 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_resetCounters(JNI
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_close(JNIEnv *env, jobject obj) {
     IbPerfLib::IbFabric *handle = static_cast<IbPerfLib::IbFabric*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
 
     delete handle;
 

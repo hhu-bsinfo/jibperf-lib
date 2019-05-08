@@ -24,7 +24,7 @@ public class IbDiagPerfCounter {
         JniUtil.loadIbPerfLibJNI();
     }
 
-    private long m_nativeHandle;
+    private long m_nativeHandle = 0;
 
     private short m_portNumber;
 

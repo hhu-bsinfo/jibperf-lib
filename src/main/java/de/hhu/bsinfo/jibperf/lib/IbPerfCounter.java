@@ -23,7 +23,7 @@ public interface IbPerfCounter {
 
     void resetCounters() throws IbFileException, IbMadException;
 
-    void refreshCounters() throws IbMadException;
+    void refreshCounters() throws IbFileException, IbMadException;
 
     long getXmitDataBytes();
 

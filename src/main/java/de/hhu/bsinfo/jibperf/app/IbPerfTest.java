@@ -33,7 +33,7 @@ public class IbPerfTest {
                 NativeBuildConfig.areAdditionalExtendedCountersEnabled() ? "Enabled" : "Disabled");
 
         if(args.length < 1) {
-            System.out.println("Usage: ./IbPerfTest <mad/compat>");
+            System.out.println("Usage: IbPerfTest <mad/compat>");
             System.exit(1);
         }
 
@@ -42,7 +42,7 @@ public class IbPerfTest {
         if(args[0].equals("compat")){
             compatability = true;
         } else if(!args[0].equals("mad")){
-            System.out.println("Usage: ./IbPerfTest <mad/compat>");
+            System.out.println("Usage: IbPerfTest <mad/compat>");
             System.exit(1);
         }
 

@@ -69,11 +69,23 @@ JNIEXPORT jobjectArray JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_resetCounters(JNIEnv *env, jobject obj) {
-    static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->ResetCounters();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
+
+    handle->ResetCounters();
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_refreshCounters(JNIEnv *env, jobject obj) {
     IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
 
     try {
         handle->RefreshCounters();
@@ -84,89 +96,243 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_refreshC
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getLifespan(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetLifespan();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetLifespan();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqLocalLengthErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqLocalLengthErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqLocalLengthErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqLocalProtectionErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqLocalProtectionErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqLocalProtectionErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqLocalQpProtectionErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqLocalQpProtectionErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqLocalQpProtectionErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqOutOfSequenceErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqOutOfSequenceErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqOutOfSequenceErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqRemoteAccessErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqRemoteAccessErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqRemoteAccessErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqRemoteInvalidRequestErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqRemoteInvalidRequestErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqRemoteInvalidRequestErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqRnrNakNum(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqRnrNakNum();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqRnrNakNum();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getRqCompletionQueueEntryErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetRqCompletionQueueEntryErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetRqCompletionQueueEntryErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqBadResponseErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqBadResponseErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqBadResponseErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqLocalLengthErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqLocalLengthErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqLocalLengthErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqLocalProtectionErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqLocalProtectionErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqLocalProtectionErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqLocalQpProtectionErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqLocalQpProtectionErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqLocalQpProtectionErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqMemoryWindowBindErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqMemoryWindowBindErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqMemoryWindowBindErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqOutOfSequenceErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqOutOfSequenceErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqOutOfSequenceErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqRemoteAccessErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqRemoteAccessErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqRemoteAccessErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqRemoteInvalidRequestErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqRemoteInvalidRequestErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqRemoteInvalidRequestErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqRnrNakNum(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqRnrNakNum();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqRnrNakNum();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqRemoteOperationErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqRemoteOperationErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqRemoteOperationErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqRnrNakRetriesExceededErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqRnrNakRetriesExceededErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqRnrNakRetriesExceededErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqTransportRetriesExceededErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqTransportRetriesExceededErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqTransportRetriesExceededErrors();
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqCompletionQueueEntryErrors(JNIEnv *env, jobject obj) {
-    return static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj))->GetSqCompletionQueueEntryErrors();
+    IbPerfLib::IbDiagPerfCounter *handle = static_cast<IbPerfLib::IbDiagPerfCounter*>(getNativeHandle(env, obj));
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return 0;
+    }
+
+    return handle->GetSqCompletionQueueEntryErrors();
 }

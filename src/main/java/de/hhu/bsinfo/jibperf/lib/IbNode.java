@@ -26,7 +26,7 @@ public class IbNode implements IbPerfCounter {
         JniUtil.loadIbPerfLibJNI();
     }
 
-    private long m_nativeHandle;
+    private long m_nativeHandle = 0;
 
     private long m_guid;
 
