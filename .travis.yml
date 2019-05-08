@@ -12,9 +12,8 @@ addons:
 
 stages:
   - name: build
-  # TODO: Uncomment, once the snapshot repository is approved
-  #- name: snapshot
-  #  if: branch = development AND type = push
+  - name: snapshot
+    if: branch = development AND type = push
   - name: release
     if: branch = master AND type = push
 
@@ -22,9 +21,8 @@ jobs:
   include:
     - stage: build
       script: ./gradlew jar
-    # TODO: Uncomment, once the snapshot repository is approved
-    #- stage: snapshot
-    #  script: ./gradlew artifactoryPublish -Dbintray.user=${BINTRAY_USER} -Dbintray.key=${BINTRAY_KEY} -Dbuild.number=${TRAVIS_BUILD_NUMBER}
+    - stage: snapshot
+      script: ./gradlew artifactoryPublish -Dbintray.user=${BINTRAY_USER} -Dbintray.key=${BINTRAY_KEY} -Dbuild.number=${TRAVIS_BUILD_NUMBER}
     - stage: release
       script: ./gradlew bintrayUpload -Drelease=true -PbuildVariant=release -Dbintray.user=${BINTRAY_USER} -Dbintray.key=${BINTRAY_KEY} -Dbuild.number=${TRAVIS_BUILD_NUMBER}
 
