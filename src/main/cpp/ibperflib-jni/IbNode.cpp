@@ -60,7 +60,7 @@ JNIEXPORT jobjectArray JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLocalNod
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_resetCounters(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_resetCounters(JNIEn
 }
 
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_refreshCounters(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -98,7 +98,7 @@ JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_refreshCounters(JNI
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitDataBytes(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -109,7 +109,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitDataBytes(J
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvDataBytes(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -120,7 +120,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvDataBytes(JN
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -131,7 +131,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitPkts(JNIEnv
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -142,7 +142,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvPkts(JNIEnv 
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getUnicastXmitPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -153,7 +153,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getUnicastXmitPkts
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getUnicastRcvPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -164,7 +164,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getUnicastRcvPkts(
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getMulticastXmitPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -175,7 +175,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getMulticastXmitPk
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getMulticastRcvPkts(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -186,7 +186,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getMulticastRcvPkt
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getSymbolErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -197,7 +197,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getSymbolErrors(JN
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLinkDownedCounter(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -208,7 +208,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLinkDownedCount
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLinkRecoveryCounter(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -219,7 +219,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLinkRecoveryCou
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -230,7 +230,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvErrors(JNIEn
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvRemotePhysicalErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -241,7 +241,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvRemotePhysic
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvSwitchRelayErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -252,7 +252,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvSwitchRelayE
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitDiscards(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -263,7 +263,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitDiscards(JN
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitConstraintErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -274,7 +274,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitConstraintE
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvConstraintErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -285,7 +285,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getRcvConstraintEr
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLocalLinkIntegrityErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -296,7 +296,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLocalLinkIntegr
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getExcessiveBufferOverrunErrors(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -307,7 +307,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getExcessiveBuffer
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getVL15Dropped(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
@@ -318,7 +318,7 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getVL15Dropped(JNI
 }
 
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getXmitWait(JNIEnv *env, jobject obj) {
-    IbPerfLib::IbNode *handle = static_cast<IbPerfLib::IbNode*>(getNativeHandle(env, obj));
+    auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         
     if(handle == nullptr) {
         throwUninitializedHandleException(env);
