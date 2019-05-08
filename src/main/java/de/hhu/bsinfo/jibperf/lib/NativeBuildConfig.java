@@ -1,15 +1,9 @@
 package de.hhu.bsinfo.jibperf.lib;
 
-import java.io.IOException;
-
 public class NativeBuildConfig {
 
     static {
-        try {
-            JniUtil.loadNativeLibraryFromJar("/libIbPerfLibJNI.so");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        JniUtil.loadIbPerfLibJNI();
     }
 
     public static native String getVersion();

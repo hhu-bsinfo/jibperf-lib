@@ -5,9 +5,11 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbNetDiscException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbVerbsException;
 
-import java.io.IOException;
-
 public class IbFabric {
+
+    static {
+        JniUtil.loadIbPerfLibJNI();
+    }
 
     private long m_nativeHandle = 0;
 

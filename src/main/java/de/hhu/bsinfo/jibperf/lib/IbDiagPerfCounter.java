@@ -4,6 +4,10 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 
 public class IbDiagPerfCounter {
 
+    static {
+        JniUtil.loadIbPerfLibJNI();
+    }
+
     private long m_nativeHandle;
 
     private short m_portNumber;

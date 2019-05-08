@@ -8,6 +8,24 @@ import java.nio.file.Files;
 
 class JniUtil {
 
+    private static boolean IB_PERF_LIB_JNI_LOADED = false;
+
+    /**
+     * Load the shared object 'libIbPerfLibJNI.so' from the JAR-file.
+     */
+    public static void loadIbPerfLibJNI() {
+        if(IB_PERF_LIB_JNI_LOADED) {
+            return;
+        }
+
+        try {
+            JniUtil.loadNativeLibraryFromJar("/libIbPerfLibJNI.so");
+            IB_PERF_LIB_JNI_LOADED = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Load a native library, that is contained inside the .jar-file.
      *
@@ -15,7 +33,7 @@ class JniUtil {
      *
      * @param path The library's path inside the .jar-file
      */
-     static void loadNativeLibraryFromJar(String path) throws IOException {
+     private static void loadNativeLibraryFromJar(String path) throws IOException {
         File tmpDir = Files.createTempDirectory("jibperf-native").toFile();
         tmpDir.deleteOnExit();
 
