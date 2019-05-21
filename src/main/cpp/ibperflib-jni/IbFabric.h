@@ -10,10 +10,10 @@ extern "C" {
 /*
  * Class:     de_hhu_bsinfo_jibperf_lib_IbFabric
  * Method:    init
- * Signature: (Z)V
+ * Signature: (ZZ)V
  */
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init
-  (JNIEnv *, jobject, jboolean);
+  (JNIEnv *, jobject, jboolean, jboolean);
 
 /*
  * Class:     de_hhu_bsinfo_jibperf_lib_IbFabric

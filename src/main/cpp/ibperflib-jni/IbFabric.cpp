@@ -6,11 +6,11 @@
 #include <IbPerfLib/Exception/IbVerbsException.h>
 #include <IbPerfLib/Exception/IbNetDiscException.h>
 
-JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env, jobject obj, jboolean compatibility) {
+JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbFabric_init(JNIEnv *env, jobject obj, jboolean network, jboolean compatibility) {
     IbPerfLib::IbFabric *fabricHandle = nullptr;
 
     try {
-        fabricHandle = new IbPerfLib::IbFabric(compatibility);
+        fabricHandle = new IbPerfLib::IbFabric(network, compatibility);
     } catch(const IbPerfLib::IbFileException &exception) {
         env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbFileException"), exception.what());
         return;

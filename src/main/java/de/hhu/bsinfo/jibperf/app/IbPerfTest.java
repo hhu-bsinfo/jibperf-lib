@@ -32,24 +32,32 @@ public class IbPerfTest {
                 NativeBuildConfig.getGitRevision(), NativeBuildConfig.getGitBranch(), NativeBuildConfig.getBuildDate(),
                 NativeBuildConfig.areAdditionalExtendedCountersEnabled() ? "Enabled" : "Disabled");
 
-        if(args.length < 1) {
-            System.out.println("Usage: IbPerfTest <mad/compat>");
+        if(args.length < 2) {
+            System.out.println("Usage: IbPerfTest <network/local> <mad/compat>");
             System.exit(1);
         }
 
-        boolean compatability = false;
+        boolean network = false;
+        boolean compatibility = false;
 
-        if(args[0].equals("compat")){
-            compatability = true;
-        } else if(!args[0].equals("mad")){
-            System.out.println("Usage: IbPerfTest <mad/compat>");
+        if(args[0].equals("network")){
+            network = true;
+        } else if(!args[0].equals("local")){
+            System.out.println("Usage: IbPerfTest <network/local> <mad/compat>");
+            System.exit(1);
+        }
+
+        if(args[1].equals("compat")){
+            compatibility = true;
+        } else if(!args[1].equals("mad")){
+            System.out.println("Usage: IbPerfTest <network/local> <mad/compat>");
             System.exit(1);
         }
 
         IbFabric fabric = null;
 
         try {
-            fabric = new IbFabric(compatability);
+            fabric = new IbFabric(network, compatibility);
         } catch (IbFileException | IbMadException | IbVerbsException | IbNetDiscException e) {
             e.printStackTrace();
             System.exit(1);

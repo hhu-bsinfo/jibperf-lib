@@ -6,59 +6,6 @@
 #include <IbPerfLib/Exception/IbVerbsException.h>
 #include <IbPerfLib/Exception/IbMadException.h>
 
-JNIEXPORT jobjectArray JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_getLocalNodes(JNIEnv *env, jclass cls) {
-    int32_t numDevices;
-
-    ibv_device **deviceList = ibv_get_device_list(&numDevices);
-
-    if(deviceList == nullptr) {
-        std::string errorMessage("Unable to get device list! Error: ");
-        errorMessage += strerror(errno);
-
-        env->ThrowNew(env->FindClass("de/hhu/bsinfo/jibperf/lib/exception/IbVerbsException"), errorMessage.c_str());
-        return env->NewObjectArray(0, cls, nullptr);
-    }
-
-    jmethodID constructor = env->GetMethodID(cls, "<init>", "(JJLjava/lang/String;)V");
-    jobjectArray nodes = env->NewObjectArray(numDevices, cls, nullptr);
-
-    jclass portClass = env->FindClass("de/hhu/bsinfo/jibperf/lib/IbPort");
-    jmethodID portConstructor = env->GetMethodID(portClass, "<init>", "(JSSS)V");
-    jfieldID portsID = env->GetFieldID(cls, "m_ports", "[Lde/hhu/bsinfo/jibperf/lib/IbPort;");
-
-    for(int32_t i = 0; i < numDevices; i++) {
-        IbPerfLib::IbNode *nodeHandle = nullptr;
-
-        try {
-            nodeHandle = new IbPerfLib::IbNode(deviceList[i]);
-        } catch(const IbPerfLib::IbFileException &exception) {
-            continue;
-        } catch(const IbPerfLib::IbMadException &exception) {
-            continue;
-        }
-
-        jobject node = env->NewObject(cls, constructor, reinterpret_cast<jlong>(nodeHandle), nodeHandle->GetGuid(),
-                env->NewStringUTF(nodeHandle->GetDescription().c_str()));
-
-        jobjectArray ports = env->NewObjectArray(nodeHandle->GetNumPorts(), portClass, nullptr);
-
-        for(uint32_t j = 0; j < nodeHandle->GetNumPorts(); j++) {
-            IbPerfLib::IbPort *portHandle = nodeHandle->GetPorts()[j];
-
-            jobject port = env->NewObject(portClass, portConstructor, reinterpret_cast<jlong>(portHandle),
-                        portHandle->GetLid(), portHandle->GetNum(), portHandle->GetLinkWidth());
-
-            env->SetObjectArrayElement(ports, j, port);
-        }
-
-        env->SetObjectField(node, portsID, ports);
-
-        env->SetObjectArrayElement(nodes, i, node);
-    }
-
-    return nodes;
-}
-
 JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbNode_resetCounters(JNIEnv *env, jobject obj) {
     auto *handle = getNativeHandle<IbPerfLib::IbNode>(env, obj);
         

@@ -40,8 +40,6 @@ public class IbNode implements IbPerfCounter {
         this.m_description = description;
     }
 
-    public static native IbNode[] getLocalNodes() throws IbVerbsException;
-
     public String getDescription() {
         return m_description;
     }

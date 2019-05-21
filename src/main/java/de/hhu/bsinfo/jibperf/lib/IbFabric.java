@@ -31,11 +31,13 @@ public class IbFabric {
 
     private IbNode[] m_nodes = null;
 
-    public IbFabric(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException {
-        init(compatibility);
+    public IbFabric(boolean network, boolean compatibility)
+            throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException {
+        init(network, compatibility);
     }
 
-    private native void init(boolean compatibility) throws IbFileException, IbMadException, IbVerbsException;
+    private native void init(boolean network, boolean compatibility)
+            throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException;
 
     public native void refreshCounters() throws IbFileException, IbMadException;
 

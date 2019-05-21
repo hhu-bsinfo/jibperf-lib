@@ -2,7 +2,7 @@ import com.cisco.gradle.externalbuild.ExternalNativeLibrarySpec
 import com.cisco.gradle.externalbuild.tasks.CMake
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
     id 'com.cisco.external-build' version '1.14'
     id 'com.jfrog.bintray' version '1.8.4'
@@ -12,8 +12,6 @@ plugins {
 group = 'de.hhu.bsinfo'
 version version = '0.1.0' + (Boolean.valueOf(System.getProperty('release')) ? '' : '-SNAPSHOT')
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
     jcenter()
@@ -21,6 +19,12 @@ repositories {
     maven {
         url "https://plugins.gradle.org/m2/"
     }
+}
+
+compileJava {
+    sourceCompatibility = '8'
+    targetCompatibility = '8'
+    options.encoding = 'UTF-8'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -81,6 +85,10 @@ jar {
 artifacts {
     archives sourcesJar
     archives javadocJar
+}
+
+wrapper {
+    gradleVersion = "4.10.3"
 }
 
 apply from: 'publish.gradle'
