@@ -75,7 +75,5 @@ public class IbPerfTest {
                 System.out.printf("An exception occurred: %s", exception.getMessage());
             } catch(InterruptedException ignored) {}
         }
-
-        fabric.close();
     }
 }

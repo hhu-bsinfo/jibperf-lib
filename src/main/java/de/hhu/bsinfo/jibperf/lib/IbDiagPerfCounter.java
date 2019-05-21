@@ -18,11 +18,15 @@ package de.hhu.bsinfo.jibperf.lib;
 
 import de.hhu.bsinfo.jibperf.lib.exception.IbFileException;
 
-public class IbDiagPerfCounter {
+import java.lang.ref.Cleaner;
+
+public class IbDiagPerfCounter extends Closeable {
 
     static {
         JniUtil.loadIbPerfLibJNI();
     }
+
+    private static final Cleaner CLEANER = Cleaner.create();
 
     private long m_nativeHandle = 0;
 
@@ -34,6 +38,8 @@ public class IbDiagPerfCounter {
         this.m_nativeHandle = nativeHandle;
         this.m_portNumber = portNumber;
         this.m_deviceName = deviceName;
+
+        CLEANER.register(this, new CloseableCleaner(this));
     }
 
     public static native IbDiagPerfCounter[] getLocalPorts() throws IbFileException;
@@ -93,6 +99,9 @@ public class IbDiagPerfCounter {
     public native long getSqTransportRetriesExceededErrors();
 
     public native long getSqCompletionQueueEntryErrors();
+
+    @Override
+    native void close();
 
     @Override
     public String toString() {

@@ -207,6 +207,14 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqTr
 JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqCompletionQueueEntryErrors
   (JNIEnv *, jobject);
 
+/*
+ * Class:     de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter
+ * Method:    close
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_close
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

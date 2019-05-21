@@ -22,10 +22,6 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbVerbsException;
 
 public class IbNode implements IbPerfCounter {
 
-    static {
-        JniUtil.loadIbPerfLibJNI();
-    }
-
     private long m_nativeHandle = 0;
 
     private long m_guid;

@@ -21,11 +21,15 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbNetDiscException;
 import de.hhu.bsinfo.jibperf.lib.exception.IbVerbsException;
 
-public class IbFabric {
+import java.lang.ref.Cleaner;
+
+public class IbFabric extends Closeable {
 
     static {
         JniUtil.loadIbPerfLibJNI();
     }
+
+    private static final Cleaner CLEANER = Cleaner.create();
 
     private long m_nativeHandle = 0;
 
@@ -34,6 +38,8 @@ public class IbFabric {
     public IbFabric(boolean network, boolean compatibility)
             throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException {
         init(network, compatibility);
+
+        CLEANER.register(this, new CloseableCleaner(this));
     }
 
     private native void init(boolean network, boolean compatibility)
@@ -43,8 +49,6 @@ public class IbFabric {
 
     public native void resetCounters() throws IbMadException;
 
-    public native void close();
-
     public int getNumNodes() {
         return m_nodes.length;
     }
@@ -52,6 +56,9 @@ public class IbFabric {
     public IbNode[] getNodes() {
         return m_nodes;
     }
+
+    @Override
+    native void close();
 
     @Override
     public String toString() {

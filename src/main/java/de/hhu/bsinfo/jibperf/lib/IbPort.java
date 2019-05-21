@@ -21,10 +21,6 @@ import de.hhu.bsinfo.jibperf.lib.exception.IbMadException;
 
 public class IbPort implements IbPerfCounter {
 
-    static {
-        JniUtil.loadIbPerfLibJNI();
-    }
-
     private long m_nativeHandle = 0;
 
     private short m_lid;

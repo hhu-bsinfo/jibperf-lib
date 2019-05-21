@@ -336,3 +336,16 @@ JNIEXPORT jlong JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_getSqCo
 
     return handle->GetSqCompletionQueueEntryErrors();
 }
+
+JNIEXPORT void JNICALL Java_de_hhu_bsinfo_jibperf_lib_IbDiagPerfCounter_close(JNIEnv *env, jobject obj) {
+    auto *handle = getNativeHandle<IbPerfLib::IbDiagPerfCounter>(env, obj);
+
+    if(handle == nullptr) {
+        throwUninitializedHandleException(env);
+        return;
+    }
+
+    delete handle;
+
+    setNativeHandle<IbPerfLib::IbDiagPerfCounter>(env, obj, nullptr);
+}
