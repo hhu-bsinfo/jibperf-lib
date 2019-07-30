@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+project(detectorJNI)
+
 cmake_minimum_required(VERSION 3.5)
 include(ExternalProject)
 
@@ -32,39 +34,39 @@ endif()
 # Set git branch
 execute_process(COMMAND git rev-parse --symbolic-full-name --abbrev-ref HEAD
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        OUTPUT_VARIABLE IBPERFLIBJNI_GIT_BRANCH ERROR_QUIET)
-string(STRIP "${IBPERFLIBJNI_GIT_BRANCH}" IBPERFLIBJNI_GIT_BRANCH)
-if (IBPERFLIBJNI_GIT_BRANCH STREQUAL "")
-    set(IBPERFLIBJNI_GIT_BRANCH "master")
+        OUTPUT_VARIABLE DETECTORJNI_GIT_BRANCH ERROR_QUIET)
+string(STRIP "${DETECTORJNI_GIT_BRANCH}" DETECTORJNI_GIT_BRANCH)
+if (DETECTORJNI_GIT_BRANCH STREQUAL "")
+    set(DETECTORJNI_GIT_BRANCH "master")
 endif()
 
 # Set source directory variables
-set(IBPERFLIBJNI_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
-set(IBPERFLIBJNI_SRC_DIR "${IBPERFLIBJNI_ROOT_DIR}/src/main/cpp")
+set(DETECTORJNI_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/..")
+set(DETECTORJNI_SRC_DIR "${DETECTORJNI_ROOT_DIR}/src/main/cpp")
 
 # Set output directory variables
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${IBPERFLIBJNI_ROOT_DIR}/build/libs)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${IBPERFLIBJNI_ROOT_DIR}/build/libs)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${IBPERFLIBJNI_ROOT_DIR}/build/libs)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${DETECTORJNI_ROOT_DIR}/build/libs)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${DETECTORJNI_ROOT_DIR}/build/libs)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${DETECTORJNI_ROOT_DIR}/build/libs)
 
 # Set compiler-flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
 
-# Add IbPerfLib as external project
-ExternalProject_Add(IbPerfLib_git
-        GIT_REPOSITORY https://github.com/hhu-bsinfo/ibperf-lib.git
-        GIT_TAG ${IBPERFLIBJNI_GIT_BRANCH}
-        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/IbPerfLib
+include(ExternalProject)
+
+ExternalProject_Add(detector_git
+        GIT_REPOSITORY https://github.com/hhu-bsinfo/detector.git
+        PREFIX ${CMAKE_CURRENT_BINARY_DIR}/detector
         INSTALL_COMMAND "")
 
-ExternalProject_Get_Property(IbPerfLib_git binary_dir)
-ExternalProject_Get_Property(IbPerfLib_git source_dir)
+ExternalProject_Get_Property(detector_git binary_dir)
+ExternalProject_Get_Property(detector_git source_dir)
 
-add_library(IbPerfLib STATIC IMPORTED)
-set_property(TARGET IbPerfLib PROPERTY IMPORTED_LOCATION ${binary_dir}/ar/libIbPerfLib.a)
+add_library(detector STATIC IMPORTED)
+set_property(TARGET detector PROPERTY IMPORTED_LOCATION ${binary_dir}/ar/libdetector.a)
 
-add_dependencies(IbPerfLib IbPerfLib_git)
+add_dependencies(detector detector_git)
 
 include_directories(${source_dir}/src)
 
-add_subdirectory(IbPerfLibJNI)
+add_subdirectory(detectorJNI)

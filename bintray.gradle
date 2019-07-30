@@ -7,12 +7,12 @@ bintray {
 
     pkg {
         repo = 'dxram'
-        name = 'jibperf-lib'
+        name = 'jDetector'
         userOrg = 'hhu-bsinfo'
         licenses = ['GPL-3.0']
-        vcsUrl = 'https://github.com/hhu-bsinfo/jibperf-lib.git'
-        labels = ['infiniband']
-        githubRepo = 'hhu-bsinfo/jibperf-lib'
+        vcsUrl = 'https://github.com/hhu-bsinfo/jdetector.git'
+        labels = ['infiniband', 'infiniband-monitoring', 'network-monitoring', 'java', 'jni']
+        githubRepo = 'hhu-bsinfo/jdetector'
         githubReleaseNotesFile = 'README.md'
 
         version {

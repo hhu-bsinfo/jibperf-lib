@@ -7,6 +7,8 @@ plugins {
     id 'com.cisco.external-build' version '1.14'
     id 'com.jfrog.bintray' version '1.8.4'
     id "com.jfrog.artifactory" version "4.7.5"
+    id 'de.fuerstenau.buildconfig' version '1.1.8'
+    id 'com.palantir.git-version' version '0.11.0'
 }
 
 group = 'de.hhu.bsinfo'
@@ -45,7 +47,7 @@ dependencies {
 
 model {
     components {
-        IbPerfLibJNI(ExternalNativeLibrarySpec) {
+        detectorJNI(ExternalNativeLibrarySpec) {
             buildConfig(CMake) {
                 cmakeRoot '.'
                 targets 'all'
@@ -62,23 +64,23 @@ model {
     }
 }
 
-compileJava.dependsOn "IbPerfLibJNISharedLibrary"
+compileJava.dependsOn "detectorJNISharedLibrary"
 
 jar {
     doFirst {
         println "\nCMake output:"
-        new File('build/tmp/externalBuildIbPerfLibJNISharedLibrary/cmake-output.txt').eachLine { line ->
+        new File('build/tmp/externalBuildDetectorJNISharedLibrary/cmake-output.txt').eachLine { line ->
             println line
         }
 
         println "\nMake output:"
-        new File('build/tmp/externalBuildIbPerfLibJNISharedLibrary/makeAll-output.txt').eachLine { line ->
+        new File('build/tmp/externalBuildDetectorJNISharedLibrary/makeAll-output.txt').eachLine { line ->
             println line
         }
     }
 
     from('build/libs/') {
-        include 'libIbPerfLibJNI.so'
+        include 'libdetectorJNI.so'
     }
 }
 
@@ -89,6 +91,22 @@ artifacts {
 
 wrapper {
     gradleVersion = "4.10.3"
+}
+
+buildConfig {
+    def gitVersion = versionDetails()
+
+    appName = project.name
+    version = project.version
+
+    clsName = 'BuildConfig'
+    packageName = 'de.hhu.bsinfo.jdetector.generated'
+
+    charset = 'UTF-8'
+
+    buildConfigField 'String', 'BUILD_DATE', new Date().format('yyyy-MM-dd HH:mm:ss')
+    buildConfigField 'String', 'GIT_COMMIT', gitVersion.gitHash
+    buildConfigField 'String', 'GIT_BRANCH', gitVersion.branchName
 }
 
 apply from: 'publish.gradle'
