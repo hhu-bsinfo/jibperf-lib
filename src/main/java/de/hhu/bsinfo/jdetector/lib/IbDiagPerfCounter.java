@@ -17,15 +17,12 @@
 package de.hhu.bsinfo.jdetector.lib;
 
 import de.hhu.bsinfo.jdetector.lib.exception.IbFileException;
-import java.lang.ref.Cleaner;
 
 public class IbDiagPerfCounter implements AutoCloseable {
 
     static {
         JniUtil.loadIbPerfLibJNI();
     }
-
-    private static final Cleaner CLEANER = Cleaner.create();
 
     private long m_nativeHandle;
 
@@ -37,8 +34,6 @@ public class IbDiagPerfCounter implements AutoCloseable {
         this.m_nativeHandle = nativeHandle;
         this.m_portNumber = portNumber;
         this.m_deviceName = deviceName;
-
-        CLEANER.register(this, new CloseableCleaner(this));
     }
 
     public static native IbDiagPerfCounter[] getLocalPorts() throws IbFileException;

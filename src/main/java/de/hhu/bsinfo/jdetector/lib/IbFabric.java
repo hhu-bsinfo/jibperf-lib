@@ -21,15 +21,11 @@ import de.hhu.bsinfo.jdetector.lib.exception.IbMadException;
 import de.hhu.bsinfo.jdetector.lib.exception.IbNetDiscException;
 import de.hhu.bsinfo.jdetector.lib.exception.IbVerbsException;
 
-import java.lang.ref.Cleaner;
-
 public class IbFabric implements AutoCloseable {
 
     static {
         JniUtil.loadIbPerfLibJNI();
     }
-
-    private static final Cleaner CLEANER = Cleaner.create();
 
     private long m_nativeHandle;
 
@@ -38,8 +34,6 @@ public class IbFabric implements AutoCloseable {
     public IbFabric(boolean network, boolean compatibility)
             throws IbFileException, IbMadException, IbVerbsException, IbNetDiscException {
         init(network, compatibility);
-
-        CLEANER.register(this, new CloseableCleaner(this));
     }
 
     private native void init(boolean network, boolean compatibility)
