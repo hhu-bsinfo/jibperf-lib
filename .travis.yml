@@ -20,7 +20,7 @@ stages:
 jobs:
   include:
     - stage: build
-      script: ./gradlew jar
+      script: ./gradlew cmakeBuild jar
     - stage: snapshot
       script: ./gradlew artifactoryPublish -Dbintray.user=${BINTRAY_USER} -Dbintray.key=${BINTRAY_KEY} -Dbuild.number=${TRAVIS_BUILD_NUMBER}
     - stage: release

@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+project(detectorJNI)
+
 message(STATUS "Project " ${PROJECT_NAME})
 
 include_directories(${DETECTORJNI_SRC_DIR})

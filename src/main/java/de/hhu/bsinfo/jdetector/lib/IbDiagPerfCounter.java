@@ -21,7 +21,7 @@ import de.hhu.bsinfo.jdetector.lib.exception.IbFileException;
 public class IbDiagPerfCounter implements AutoCloseable {
 
     static {
-        JniUtil.loadIbPerfLibJNI();
+        System.loadLibrary("detectorJNI");
     }
 
     private long m_nativeHandle;

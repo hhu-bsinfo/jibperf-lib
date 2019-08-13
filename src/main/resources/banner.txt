@@ -1,4 +1,4 @@
-       _ ____       __            __             # Version (Detector)  : %s (%s)
+       _ ____       __            __             # Version             : %s (Detector: %s)
       (_) __ \___  / /____  _____/ /_____  _____ # Build Date          : %s
      / / / / / _ \/ __/ _ \/ ___/ __/ __ \/ ___/ # Git Branch          : %s
     / / /_/ /  __/ /_/  __/ /__/ /_/ /_/ / /     # Git Commit          : %s

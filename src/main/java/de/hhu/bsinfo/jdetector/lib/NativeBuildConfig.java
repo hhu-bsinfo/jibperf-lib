@@ -26,7 +26,7 @@ import de.hhu.bsinfo.jdetector.generated.BuildConfig;
 public class NativeBuildConfig {
 
     static {
-        JniUtil.loadIbPerfLibJNI();
+        System.loadLibrary("detectorJNI");
     }
 
     public static void printBanner() {

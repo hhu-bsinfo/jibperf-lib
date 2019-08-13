@@ -1,10 +1,7 @@
-import com.cisco.gradle.externalbuild.ExternalNativeLibrarySpec
-import com.cisco.gradle.externalbuild.tasks.CMake
-
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.cisco.external-build' version '1.14'
+    id 'net.freudasoft.gradle-cmake-plugin' version '0.0.2'
     id 'com.jfrog.bintray' version '1.8.4'
     id "com.jfrog.artifactory" version "4.7.5"
     id 'de.fuerstenau.buildconfig' version '1.1.8'
@@ -45,43 +42,11 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-model {
-    components {
-        detectorJNI(ExternalNativeLibrarySpec) {
-            buildConfig(CMake) {
-                cmakeRoot '.'
-                targets 'all'
-
-                inputs.file 'CMakeLists.txt'
-                
-                workingDir 'build'
-                
-                environment = [
-                        'PATH': toolChainPath
-                ]
-            }
-        }
-    }
-}
-
-compileJava.dependsOn "detectorJNISharedLibrary"
-
-jar {
-    doFirst {
-        println "\nCMake output:"
-        new File('build/tmp/externalBuildDetectorJNISharedLibrary/cmake-output.txt').eachLine { line ->
-            println line
-        }
-
-        println "\nMake output:"
-        new File('build/tmp/externalBuildDetectorJNISharedLibrary/makeAll-output.txt').eachLine { line ->
-            println line
-        }
-    }
-
-    from('build/libs/') {
-        include 'libdetectorJNI.so'
-    }
+cmake {
+    sourceFolder = file(project.projectDir.toString())
+    buildConfig = 'Release'
+    buildTarget = 'install'
+    buildClean = true
 }
 
 artifacts {
@@ -90,7 +55,7 @@ artifacts {
 }
 
 wrapper {
-    gradleVersion = "4.10.3"
+    gradleVersion = "5.4.1"
 }
 
 buildConfig {

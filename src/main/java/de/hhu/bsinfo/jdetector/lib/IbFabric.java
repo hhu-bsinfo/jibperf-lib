@@ -24,7 +24,7 @@ import de.hhu.bsinfo.jdetector.lib.exception.IbVerbsException;
 public class IbFabric implements AutoCloseable {
 
     static {
-        JniUtil.loadIbPerfLibJNI();
+        System.loadLibrary("detectorJNI");
     }
 
     private long m_nativeHandle;
