@@ -23,12 +23,20 @@ import java.util.stream.Collectors;
 
 import de.hhu.bsinfo.jdetector.generated.BuildConfig;
 
+/**
+ * Provides build information about the native library 'detector', which jDetector depends on.
+ *
+ * @author Fabian Ruhland, Fabian.Ruhland@hhu.de
+ */
 public class NativeBuildConfig {
 
     static {
         System.loadLibrary("detectorJNI");
     }
 
+    /**
+     * Print the jDetector banner, including version and build information.
+     */
     public static void printBanner() {
         InputStream inputStream = NativeBuildConfig.class.getClassLoader().getResourceAsStream("banner.txt");
 
@@ -44,13 +52,29 @@ public class NativeBuildConfig {
         System.out.print("\n\n");
     }
 
+    /**
+     * Get the version of detector.
+     */
     public static native String getVersion();
 
+    /**
+     * Get the git commit hash of detector.
+     */
     public static native String getGitRevision();
 
+    /**
+     * Get the git commit branch of detector.
+     */
     public static native String getGitBranch();
 
+    /**
+     * Get the build date of detector.
+     */
     public static native String getBuildDate();
 
+    /**
+     * Check, if the loaded version of detector supports additional extended counters.
+     * If yes, all performance counters are 64-bit values, otherwise some counters are only 32-bit values.
+     */
     public static native boolean areAdditionalExtendedCountersEnabled();
 }

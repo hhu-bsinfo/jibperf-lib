@@ -19,16 +19,41 @@ package de.hhu.bsinfo.jdetector.lib;
 import de.hhu.bsinfo.jdetector.lib.exception.IbFileException;
 import de.hhu.bsinfo.jdetector.lib.exception.IbMadException;
 
+/**
+ * Reads performance counters from a single port of an InfiniBand device.
+ *
+ * @author Fabian Ruhland, Fabian.Ruhland@hhu.de
+ */
 public class IbPort implements IbPerfCounter {
 
+    /**
+     * Pointer to the corresponding native object.
+     */
     private long m_nativeHandle;
 
+    /**
+     * The lid of the port, that shall be monitored.
+     */
     private short m_lid;
 
+    /**
+     * The number, that the port has on its device.
+     */
     private short m_portNum;
 
+    /**
+     * The port's active link width.
+     */
     private short m_linkWidth;
 
+    /**
+     * Constructor.
+     *
+     * @param nativeHandle Pointer to the corresponding native
+     * @param lid The port's local id
+     * @param portNum The number, that the port has on its device
+     * @param linkWidth The port's link width
+     */
     private IbPort(long nativeHandle, short lid, short portNum, short linkWidth) {
         this.m_nativeHandle = nativeHandle;
         this.m_lid = lid;
@@ -36,14 +61,23 @@ public class IbPort implements IbPerfCounter {
         this.m_linkWidth = linkWidth;
     }
 
+    /**
+     * Get the port's local id.
+     */
     public short getLid() {
         return m_lid;
     }
 
+    /**
+     * Get the number, that the port has on its device.
+     */
     public short getNum() {
         return m_portNum;
     }
 
+    /**
+     * Get the port's link width.
+     */
     public short getLinkWidth() {
         return m_linkWidth;
     }

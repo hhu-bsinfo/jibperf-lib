@@ -19,34 +19,71 @@ package de.hhu.bsinfo.jdetector.lib;
 import de.hhu.bsinfo.jdetector.lib.exception.IbFileException;
 import de.hhu.bsinfo.jdetector.lib.exception.IbMadException;
 
+/**
+ * Represents a node in an InfiniBand-fabric (e.g. a Switch or an HCA).
+ * The performance counters are aggregated over all of the node's ports.
+ *
+ * @author Fabian Ruhland, Fabian.Ruhland@hhu.de
+ */
 public class IbNode implements IbPerfCounter {
 
+    /**
+     * Pointer to the corresponding native object.
+     */
     private long m_nativeHandle;
 
+    /**
+     * The node's global unique id.
+     */
     private long m_guid;
 
+    /**
+     * A short string describing the node (e.g. hostname, manufacturer, ...)
+     */
     private String m_description;
 
+    /**
+     * All of the node's ports.
+     */
     private IbPort[] m_ports = null;
 
+    /**
+     * Constructor.
+     *
+     * @param nativeHandle Pointer to the corresponding native
+     * @param guid The node's global unique id
+     * @param description The node's description
+     */
     private IbNode(long nativeHandle, long guid, String description) {
         this.m_nativeHandle = nativeHandle;
         this.m_guid = guid;
         this.m_description = description;
     }
 
+    /**
+     * Get the node's description;
+     */
     public String getDescription() {
         return m_description;
     }
 
+    /**
+     * Get the node's global unique id;
+     */
     public long getGuid() {
         return m_guid;
     }
 
+    /**
+     * Get the amount of ports the node has.
+     */
     public short getNumPorts() {
         return 0;
     }
 
+    /**
+     * Get all of the node's ports in an array.
+     */
     public IbPort[] getPorts() {
         return m_ports;
     }

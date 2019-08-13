@@ -43,8 +43,12 @@ dependencies {
 }
 
 cmake {
+    // TODO: Setting 'buildConfig' is unnecessary for detectorJNI, but a bug in the cmake plugin
+    // prevents the project from building, if this variable is not set. Once this bug is fixed,
+    // the line can be deleted.
+
     sourceFolder = file(project.projectDir.toString())
-    buildConfig = 'Release'
+    buildConfig = 'release'
     buildTarget = 'install'
     buildClean = true
 }
