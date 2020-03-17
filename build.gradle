@@ -1,11 +1,11 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.freudasoft.gradle-cmake-plugin' version '0.0.2'
+    id 'net.freudasoft.gradle-cmake-plugin' version '0.0.4'
     id 'com.jfrog.bintray' version '1.8.4'
-    id "com.jfrog.artifactory" version "4.7.5"
+    id "com.jfrog.artifactory" version "4.14.1"
     id 'de.fuerstenau.buildconfig' version '1.1.8'
-    id 'com.palantir.git-version' version '0.11.0'
+    id 'com.palantir.git-version' version '0.12.2'
 }
 
 group = 'de.hhu.bsinfo'
@@ -48,8 +48,6 @@ cmake {
     // the line can be deleted.
 
     sourceFolder = file(project.projectDir.toString())
-    buildConfig = 'release'
-    buildTarget = 'install'
     buildClean = true
 }
 
@@ -59,7 +57,7 @@ artifacts {
 }
 
 wrapper {
-    gradleVersion = "5.4.1"
+    gradleVersion = "6.2.2"
 }
 
 buildConfig {

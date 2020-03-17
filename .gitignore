@@ -13,3 +13,4 @@ out/
 .classpath
 .project
 .settings/
+local.properties
