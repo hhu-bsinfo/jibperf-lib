@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-<a href="https://travis-ci.org/hhu-bsinfo/jdetector"><img src="https://travis-ci.org/hhu-bsinfo/jdetector.svg?branch=master"></a>
+<a href="https://travis-ci.com/hhu-bsinfo/jdetector"><img src="https://travis-ci.org/hhu-bsinfo/jdetector.svg?branch=master"></a>
   <a href="https://openjdk.java.net/projects/jdk8/"><img src="https://img.shields.io/badge/java-8-blue.svg"></a>
 <a href="https://github.com/hhu-bsinfo/observatory/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-GPLv3-orange.svg"></a>
 </p>
@@ -44,36 +44,27 @@ Building the Java component does not require any special preparation. You can ju
 
 # Include in other projects
 
-It is possible to use jDetector in other Gradle projects. The latest development snapshot is hosted on JFrog Artifactory (https://oss.jfrog.org/artifactory/oss-snapshot-local), while the latest stable version can be found on Bintray (https://dl.bintray.com/hhu-bsinfo/dxram).
-
-To include the latest development version into your project, use the following code in your `build.gradle`:
-
-```
-repositories {
-    maven {
-        url 'https://oss.jfrog.org/artifactory/oss-snapshot-local'
-    }
-}
-
-dependencies {
-    implementation 'de.hhu.bsinfo:jdetector:0.1.0-SNAPSHOT'
-}
-```
-
-To include a stable version of jDetector, you can use this piece of code:
-
+It is possible to use jDetector in other Gradle projects. The latest releases are available from the GitHub Package Registry.
+To include jDetector into your project, use the following code in your `build.gradle`:
 
 ```
 repositories {
     maven {
-        url "https://dl.bintray.com/hhu-bsinfo/dxram"
+        name = "GitHubPackages jDetector"
+        url = "https://maven.pkg.github.com/hhu-bsinfo/jdetector"
+        credentials {
+            username = project.findProperty("gpr.user")
+            password = project.findProperty("gpr.token")
+        }
     }
 }
 
 dependencies {
-    implementation 'de.hhu.bsinfo:jdetector:0.1.0'
+    implementation 'de.hhu.bsinfo:jdetector:0.1.1'
 }
 ```
+
+Use a file called `gradle.properties` to set `gpr.user` to your GitHub username and `gpr.token` to a Personal Access Token with `read:packages` enabled. See the [GitHub Docs](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-gradle-registry) for mor information on the GitHub Package Registry.
 
 # Usage
 

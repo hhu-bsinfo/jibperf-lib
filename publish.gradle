@@ -9,9 +9,9 @@ def pomConfig = {
 
     developers {
         developer {
-            id 'faruh100'
+            id 'fruhland'
             name 'Fabian Ruhland'
-            email 'fabian.ruhland@uni-duesseldorf.de'
+            email 'ruhland@hhu.de'
         }
     }
 
@@ -21,9 +21,18 @@ def pomConfig = {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/hhu-bsinfo/jdetector")
+            credentials {
+                username = System.getProperty('gpr.user')
+                password = System.getProperty('gpr.token')
+            }
+        }
+    }
     publications {
-        mavenPublication(MavenPublication) {
-
+        gpr(MavenPublication) {
             from components.java
 
             artifact sourcesJar {

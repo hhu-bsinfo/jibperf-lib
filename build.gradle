@@ -2,18 +2,15 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'net.freudasoft.gradle-cmake-plugin' version '0.0.4'
-    id 'com.jfrog.bintray' version '1.8.4'
-    id "com.jfrog.artifactory" version "4.14.1"
     id 'de.fuerstenau.buildconfig' version '1.1.8'
-    id 'com.palantir.git-version' version '0.12.2'
+    id 'com.palantir.git-version' version '0.12.3'
 }
 
 group = 'de.hhu.bsinfo'
-version version = '0.1.0' + (Boolean.valueOf(System.getProperty('release')) ? '' : '-SNAPSHOT')
+version version = '0.1.1' + (Boolean.valueOf(System.getProperty('release')) ? '' : '-SNAPSHOT')
 
 repositories {
     mavenCentral()
-    jcenter()
 
     maven {
         url "https://plugins.gradle.org/m2/"
@@ -27,14 +24,12 @@ compileJava {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
     from sourceSets.main.allSource
 }
 
 javadoc.failOnError = false
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
     from javadoc.destinationDir
 }
 
@@ -57,7 +52,7 @@ artifacts {
 }
 
 wrapper {
-    gradleVersion = "6.2.2"
+    gradleVersion = "6.9"
 }
 
 buildConfig {
@@ -77,5 +72,3 @@ buildConfig {
 }
 
 apply from: 'publish.gradle'
-apply from: 'bintray.gradle'
-apply from: 'artifactory.gradle'
