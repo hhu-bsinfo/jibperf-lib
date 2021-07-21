@@ -13,8 +13,6 @@ addons:
 
 stages:
   - name: build
-  - name: snapshot
-    if: (branch = master OR branch = development) AND type = push AND tag IS NOT present
   - name: release
     if: tag IS present
 
@@ -22,8 +20,6 @@ jobs:
   include:
     - stage: build
       script: ./gradlew cmakeBuild jar
-    - stage: snapshot
-      script: ./gradlew publish -Dgpr.user=${GPR_USER} -Dgpr.token=${GPR_TOKEN}
     - stage: release
       script: ./gradlew publish -Dgpr.user=${GPR_USER} -Dgpr.token=${GPR_TOKEN} -Drelease=true
 
